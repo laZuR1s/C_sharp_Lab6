@@ -158,7 +158,8 @@ namespace C_sharp_Lab6
                     using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
                     {
                         int colCount = dataGridView2.ColumnCount;
-                        writer.WriteLine($"{colCount}");
+                        int rowCount =dataGridView2.RowCount;
+                        writer.WriteLine((rowCount).ToString()+" "+colCount.ToString());
                         for (int i = 0; i < N; i++)
                         {
                             for (int j = 0; j < colCount; j++)

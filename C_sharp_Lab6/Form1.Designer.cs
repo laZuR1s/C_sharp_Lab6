@@ -126,7 +126,6 @@
             textBox2.TabIndex = 4;
             textBox2.Text = "Введите данные...";
             textBox2.TextAlign = HorizontalAlignment.Center;
-            textBox2.UseWaitCursor = true;
             textBox2.Enter += textBox2_Enter;
             textBox2.Leave += textBox2_Leave;
             // 
