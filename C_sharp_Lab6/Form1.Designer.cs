@@ -40,6 +40,9 @@
             buttonSavePrevious = new Button();
             buttonSaveResult = new Button();
             buttonLoadFromFile = new Button();
+            label1 = new Label();
+            label2 = new Label();
+            textBox3 = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
@@ -68,7 +71,7 @@
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
             dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridView1.Location = new Point(12, 113);
+            dataGridView1.Location = new Point(12, 230);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.Size = new Size(293, 325);
             dataGridView1.TabIndex = 0;
@@ -77,7 +80,7 @@
             // 
             textBox1.BackColor = Color.WhiteSmoke;
             textBox1.ForeColor = Color.Gray;
-            textBox1.Location = new Point(12, 12);
+            textBox1.Location = new Point(131, 55);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(100, 23);
             textBox1.TabIndex = 1;
@@ -92,7 +95,7 @@
             dataGridView2.AllowUserToDeleteRows = false;
             dataGridView2.BackgroundColor = Color.White;
             dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Location = new Point(495, 113);
+            dataGridView2.Location = new Point(589, 230);
             dataGridView2.Name = "dataGridView2";
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = SystemColors.ButtonFace;
@@ -108,9 +111,9 @@
             // button1
             // 
             button1.BackColor = Color.FromArgb(192, 192, 255);
-            button1.Location = new Point(348, 230);
+            button1.Location = new Point(354, 370);
             button1.Name = "button1";
-            button1.Size = new Size(97, 76);
+            button1.Size = new Size(185, 76);
             button1.TabIndex = 3;
             button1.Text = "Изменить матрицу";
             button1.UseVisualStyleBackColor = false;
@@ -120,7 +123,7 @@
             // 
             textBox2.BackColor = Color.WhiteSmoke;
             textBox2.ForeColor = Color.Gray;
-            textBox2.Location = new Point(348, 201);
+            textBox2.Location = new Point(399, 341);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(97, 23);
             textBox2.TabIndex = 4;
@@ -132,9 +135,9 @@
             // button2
             // 
             button2.BackColor = Color.FromArgb(192, 255, 255);
-            button2.Location = new Point(143, 12);
+            button2.Location = new Point(77, 159);
             button2.Name = "button2";
-            button2.Size = new Size(138, 23);
+            button2.Size = new Size(154, 36);
             button2.TabIndex = 5;
             button2.Text = "Создать матрицу";
             button2.UseVisualStyleBackColor = false;
@@ -143,7 +146,7 @@
             // buttonSavePrevious
             // 
             buttonSavePrevious.BackColor = Color.FromArgb(192, 255, 192);
-            buttonSavePrevious.Location = new Point(86, 84);
+            buttonSavePrevious.Location = new Point(92, 201);
             buttonSavePrevious.Name = "buttonSavePrevious";
             buttonSavePrevious.Size = new Size(125, 23);
             buttonSavePrevious.TabIndex = 6;
@@ -154,7 +157,7 @@
             // buttonSaveResult
             // 
             buttonSaveResult.BackColor = Color.FromArgb(192, 255, 192);
-            buttonSaveResult.Location = new Point(574, 84);
+            buttonSaveResult.Location = new Point(673, 201);
             buttonSaveResult.Name = "buttonSaveResult";
             buttonSaveResult.Size = new Size(125, 23);
             buttonSaveResult.TabIndex = 7;
@@ -165,20 +168,54 @@
             // buttonLoadFromFile
             // 
             buttonLoadFromFile.BackColor = Color.FromArgb(255, 192, 192);
-            buttonLoadFromFile.Location = new Point(306, 12);
+            buttonLoadFromFile.Location = new Point(354, 12);
             buttonLoadFromFile.Name = "buttonLoadFromFile";
-            buttonLoadFromFile.Size = new Size(182, 23);
+            buttonLoadFromFile.Size = new Size(185, 80);
             buttonLoadFromFile.TabIndex = 8;
             buttonLoadFromFile.Text = "Заполнить из файла";
             buttonLoadFromFile.UseVisualStyleBackColor = false;
             buttonLoadFromFile.Click += buttonLoadFromFile_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label1.Location = new Point(12, 44);
+            label1.Name = "label1";
+            label1.Size = new Size(98, 32);
+            label1.TabIndex = 9;
+            label1.Text = "Строки";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            label2.Location = new Point(12, 110);
+            label2.Name = "label2";
+            label2.Size = new Size(106, 30);
+            label2.TabIndex = 10;
+            label2.Text = "Столбцы";
+            // 
+            // textBox3
+            // 
+            textBox3.ForeColor = Color.Gray;
+            textBox3.Location = new Point(131, 119);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(100, 23);
+            textBox3.TabIndex = 11;
+            textBox3.Text = "Введите данные...";
+            textBox3.Enter += textBox3_Enter;
+            textBox3.Leave += textBox3_Leave;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightGray;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(894, 576);
+            Controls.Add(textBox3);
+            Controls.Add(label2);
+            Controls.Add(label1);
             Controls.Add(buttonLoadFromFile);
             Controls.Add(buttonSaveResult);
             Controls.Add(buttonSavePrevious);
@@ -207,5 +244,8 @@
         private Button buttonSavePrevious;
         private Button buttonSaveResult;
         private Button buttonLoadFromFile;
+        private Label label1;
+        private Label label2;
+        private TextBox textBox3;
     }
 }

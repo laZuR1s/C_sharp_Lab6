@@ -7,7 +7,8 @@ namespace C_sharp_Lab6
     public partial class Form1 : Form
     {
 
-        int N;
+        int str;
+        int col;
         public Form1()
         {
             InitializeComponent();
@@ -21,7 +22,7 @@ namespace C_sharp_Lab6
         private void button1_Click(object sender, EventArgs e)
         {
             dataGridView2.Visible = false;
-            MatrMake mt = new MatrMake(N);
+            MatrMake mt = new MatrMake(str, col);
             mt.GridToMatrix(dataGridView1);
             int value;
             if (!int.TryParse(textBox2.Text, out value))
@@ -45,26 +46,31 @@ namespace C_sharp_Lab6
         private void button2_Click(object sender, EventArgs e)
         {
             int i;
-            if (!int.TryParse(textBox1.Text, out N))
+            if (!int.TryParse(textBox1.Text, out str))
+            {
+                MessageBox.Show("¬ведите корректное значение в поле ввода!");
+                return;
+            }
+            if (!int.TryParse(textBox3.Text, out col))
             {
                 MessageBox.Show("¬ведите корректное значение в поле ввода!");
                 return;
             }
             DataTable matr = new DataTable("matr");
-            DataColumn[] cols = new DataColumn[N];
-            for (i = 0; i < N; i++)
+            DataColumn[] cols = new DataColumn[col];
+            for (i = 0; i < col; i++)
             {
                 cols[i] = new DataColumn(i.ToString());
                 matr.Columns.Add(cols[i]);
             }
-            for (i = 0; i < N; i++)
+            for (i = 0; i < str; i++)
             {
                 DataRow newRow;
                 newRow = matr.NewRow();
                 matr.Rows.Add(newRow);
             }
             dataGridView1.DataSource = matr;
-            for (i = 0; i < N; i++)
+            for (i = 0; i < col; i++)
                 dataGridView1.Columns[i].Width = 50;
             dataGridView1.Visible = true;
         }
@@ -84,14 +90,15 @@ namespace C_sharp_Lab6
                     using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
                     {
                         int colCount = dataGridView1.ColumnCount;
+                        int rowCount = dataGridView1.RowCount;
 
-                        writer.WriteLine($"{colCount}");
-                        for (int i = 0; i < N; i++)
+                        writer.WriteLine(rowCount + " " + colCount);
+                        for (int i = 0; i < rowCount; i++)
                         {
-                            for (int j = 0; j < N; j++)
+                            for (int j = 0; j < colCount; j++)
                             {
                                 writer.Write(dataGridView1.Rows[i].Cells[j].Value.ToString());
-                                if (j < N - 1)
+                                if (j < colCount - 1)
                                     writer.Write(' ');
                             }
                             writer.WriteLine();
@@ -116,22 +123,24 @@ namespace C_sharp_Lab6
             {
                 string[] lines = File.ReadAllLines(openFileDialog.FileName);
 
-                N = Convert.ToInt32(lines[0]);
+                string[] dimensions = lines[0].Split(' ');
+                str = Convert.ToInt32(dimensions[0]);
+                col = Convert.ToInt32(dimensions[1]);
 
                 DataTable matr = new DataTable("matr");
-                DataColumn[] cols = new DataColumn[N];
-                for (int i = 0; i < N; i++)
+                DataColumn[] cols = new DataColumn[col];
+                for (int i = 0; i < col; i++)
                 {
                     cols[i] = new DataColumn(i.ToString());
                     matr.Columns.Add(cols[i]);
                 }
-                for (int i = 1; i <= N; i++)
+                for (int i = 1; i <= str; i++)
                 {
                     string[] values = lines[i].Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
                     DataRow newRow;
                     newRow = matr.NewRow();
-                    for (int j = 0; j < N; j++)
+                    for (int j = 0; j < col; j++)
                     {
                         newRow[j] = int.Parse(values[j]);
                     }
@@ -140,9 +149,9 @@ namespace C_sharp_Lab6
                 dataGridView1.DataSource = matr;
                 dataGridView1.Visible = true;
 
-                for (int i = 0; i < N; i++)
+                for (int i = 0; i < col; i++)
                     dataGridView1.Columns[i].Width = 50;
-                ;
+
             }
         }
 
@@ -158,9 +167,9 @@ namespace C_sharp_Lab6
                     using (StreamWriter writer = new StreamWriter(saveFileDialog.FileName))
                     {
                         int colCount = dataGridView2.ColumnCount;
-                        int rowCount =dataGridView2.RowCount;
-                        writer.WriteLine((rowCount).ToString()+" "+colCount.ToString());
-                        for (int i = 0; i < N; i++)
+                        int rowCount = dataGridView2.RowCount;
+                        writer.WriteLine((rowCount).ToString() + " " + colCount.ToString());
+                        for (int i = 0; i < rowCount; i++)
                         {
                             for (int j = 0; j < colCount; j++)
                             {
@@ -182,41 +191,59 @@ namespace C_sharp_Lab6
 
         private void textBox1_Enter(object sender, EventArgs e)
         {
-            if (textBox1 != null && textBox1.Text == "¬ведите данные...") 
+            if (textBox1 != null && textBox1.Text == "¬ведите данные...")
             {
-                textBox1.Text = "";  
-                textBox1.ForeColor = Color.Black;  
+                textBox1.Text = "";
+                textBox1.ForeColor = Color.Black;
             }
-            
+
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
         {
 
-            if ( string.IsNullOrWhiteSpace(textBox1.Text))
+            if (string.IsNullOrWhiteSpace(textBox1.Text))
             {
-                textBox1.Text = "¬ведите данные...";  
-                textBox1.ForeColor = Color.Gray; 
+                textBox1.Text = "¬ведите данные...";
+                textBox1.ForeColor = Color.Gray;
             }
         }
 
         private void textBox2_Enter(object sender, EventArgs e)
         {
-            if (textBox2 != null && textBox2.Text == "¬ведите данные...") 
+            if (textBox2 != null && textBox2.Text == "¬ведите данные...")
             {
-                textBox2.Text = ""; 
-                textBox2.ForeColor = Color.Black; 
+                textBox2.Text = "";
+                textBox2.ForeColor = Color.Black;
             }
         }
 
         private void textBox2_Leave(object sender, EventArgs e)
         {
-            if ( string.IsNullOrWhiteSpace(textBox2.Text))
+            if (string.IsNullOrWhiteSpace(textBox2.Text))
             {
-                textBox2.Text = "¬ведите данные...";  
-                textBox2.ForeColor = Color.Gray;  
+                textBox2.Text = "¬ведите данные...";
+                textBox2.ForeColor = Color.Gray;
             }
-           
+
+        }
+
+        private void textBox3_Enter(object sender, EventArgs e)
+        {
+            if (textBox3 != null && textBox3.Text == "¬ведите данные...")
+            {
+                textBox3.Text = "";
+                textBox3.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBox3_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(textBox3.Text))
+            {
+                textBox3.Text = "¬ведите данные...";
+                textBox3.ForeColor = Color.Gray;
+            }
         }
     }
 }

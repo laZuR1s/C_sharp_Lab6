@@ -11,11 +11,11 @@ namespace C_sharp_Lab6
     {
         int n_str, n_col; //количество столбцов
         int[,] matrix; // обрабатываемая матрица
-        public MatrMake(int n)
+        public MatrMake(int str,int cols)
         {
-            n_str = n; // на входе матрица квадратная
-            n_col = n;
-            matrix = new int[n, n];
+            n_str = str; // на входе матрица квадратная
+            n_col = cols;
+            matrix = new int[n_str, n_col];
         }
 
         //заполнение матрицы из DataGridView
