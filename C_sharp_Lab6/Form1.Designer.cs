@@ -204,6 +204,7 @@
             textBox3.Size = new Size(100, 23);
             textBox3.TabIndex = 11;
             textBox3.Text = "Введите данные...";
+            textBox3.TextAlign = HorizontalAlignment.Center;
             textBox3.Enter += textBox3_Enter;
             textBox3.Leave += textBox3_Leave;
             // 
