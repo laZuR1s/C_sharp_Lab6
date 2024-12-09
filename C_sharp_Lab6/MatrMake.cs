@@ -13,7 +13,7 @@ namespace C_sharp_Lab6
         int[,] matrix; // обрабатываемая матрица
         public MatrMake(int str,int cols)
         {
-            n_str = str; // на входе матрица квадратная
+            n_str = str; 
             n_col = cols;
             matrix = new int[n_str, n_col];
         }
@@ -111,14 +111,10 @@ namespace C_sharp_Lab6
                 flag= true;
             // Обновляем матрицу и количество столбцов
             n_col = newColCount;
+
             matrix = new int[n_str, n_col];
-            for (int i = 0; i < n_str; i++)
-            {
-                for (int j = 0; j < n_col; j++)
-                {
-                    matrix[i, j] = newMatrix[i, j];
-                }
-            }
+            matrix = newMatrix;
+
             return flag;
         }
     }
